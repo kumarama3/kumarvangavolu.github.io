@@ -1,63 +1,67 @@
-const body = document.body
+// Get references to HTML elements
+const body = document.body;
+const btnTheme = document.querySelector('.fa-moon');
+const btnHamburger = document.querySelector('.fa-bars');
 
-const btnTheme = document.querySelector('.fa-moon')
-const btnHamburger = document.querySelector('.fa-bars')
-
+// Function to add theme class to body and button
 const addThemeClass = (bodyClass, btnClass) => {
-  body.classList.add(bodyClass)
-  btnTheme.classList.add(btnClass)
+  body.classList.add(bodyClass);
+  btnTheme.classList.add(btnClass);
 }
 
-const getBodyTheme = localStorage.getItem('portfolio-theme')
-const getBtnTheme = localStorage.getItem('portfolio-btn-theme')
+// Check if the theme is dark
+const isDark = () => body.classList.contains('dark');
 
-addThemeClass(getBodyTheme, getBtnTheme)
-
-const isDark = () => body.classList.contains('dark')
-
+// Function to set theme
 const setTheme = (bodyClass, btnClass) => {
+  // Remove existing theme classes
+  body.classList.remove(localStorage.getItem('portfolio-theme'));
+  btnTheme.classList.remove(localStorage.getItem('portfolio-btn-theme'));
 
-	body.classList.remove(localStorage.getItem('portfolio-theme'))
-	btnTheme.classList.remove(localStorage.getItem('portfolio-btn-theme'))
+  // Add new theme classes
+  addThemeClass(bodyClass, btnClass);
 
-  addThemeClass(bodyClass, btnClass)
-
-	localStorage.setItem('portfolio-theme', bodyClass)
-	localStorage.setItem('portfolio-btn-theme', btnClass)
+  // Store theme settings in localStorage
+  localStorage.setItem('portfolio-theme', bodyClass);
+  localStorage.setItem('portfolio-btn-theme', btnClass);
 }
 
-const toggleTheme = () =>
-	isDark() ? setTheme('light', 'fa-moon') : setTheme('dark', 'fa-sun')
+// Toggle between light and dark themes
+const toggleTheme = () => {
+  isDark() ? setTheme('light', 'fa-moon') : setTheme('dark', 'fa-sun');
+}
 
-btnTheme.addEventListener('click', toggleTheme)
+// Event listener for theme toggle button
+btnTheme.addEventListener('click', toggleTheme);
 
+// Function to display/hide navigation list
 const displayList = () => {
-	const navUl = document.querySelector('.nav__list')
-
-	if (btnHamburger.classList.contains('fa-bars')) {
-		btnHamburger.classList.remove('fa-bars')
-		btnHamburger.classList.add('fa-times')
-		navUl.classList.add('display-nav-list')
-	} else {
-		btnHamburger.classList.remove('fa-times')
-		btnHamburger.classList.add('fa-bars')
-		navUl.classList.remove('display-nav-list')
-	}
+  const navUl = document.querySelector('.nav__list');
+  
+  if (btnHamburger.classList.contains('fa-bars')) {
+    btnHamburger.classList.remove('fa-bars');
+    btnHamburger.classList.add('fa-times');
+    navUl.classList.add('display-nav-list');
+  } else {
+    btnHamburger.classList.remove('fa-times');
+    btnHamburger.classList.add('fa-bars');
+    navUl.classList.remove('display-nav-list');
+  }
 }
 
-btnHamburger.addEventListener('click', displayList)
+// Event listener for hamburger menu button
+btnHamburger.addEventListener('click', displayList);
 
+// Function to toggle display of scroll-to-top button
 const scrollUp = () => {
-	const btnScrollTop = document.querySelector('.scroll-top')
-
-	if (
-		body.scrollTop > 500 ||
-		document.documentElement.scrollTop > 500
-	) {
-		btnScrollTop.style.display = 'block'
-	} else {
-		btnScrollTop.style.display = 'none'
-	}
+  const btnScrollTop = document.querySelector('.scroll-top');
+  
+  if (body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+    btnScrollTop.style.display = 'block';
+  } else {
+    btnScrollTop.style.display = 'none';
+  }
 }
 
-document.addEventListener('scroll', scrollUp)
+// Event listener for scroll event
+document.addEventListener('scroll', scrollUp);
