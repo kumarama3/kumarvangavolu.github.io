@@ -446,10 +446,10 @@ main {
     display: none;
   }
   .experience__timeline {
-  position: relative;
-  padding-left: 20px; /* Adjust as needed */
-}
-
+    position: relative;
+    padding-left: 30px; /* Adjust as needed */
+  }
+  
   .experience__line {
     position: absolute;
     top: 0;
@@ -476,5 +476,6 @@ main {
     border-radius: 50%;
     transform: translateY(-50%);
   }
+
 }
 
